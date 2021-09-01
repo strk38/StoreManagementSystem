@@ -1,0 +1,82 @@
+﻿@model IEnumerable<TallyBook_Store_Management_System.Models.SupplierTb>
+
+@{
+    ViewBag.Title = "ViewSupplier";
+}
+
+<h2>ViewSupplier</h2>
+
+<p>
+    @Html.ActionLink("Add New", "UpdateSupplier")
+</p>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Tally Book", "Dashboard", "User", new { area = "" }, new { @class = "navbar-brand" })
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Dashboard", "User")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+   
+</body>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SNo)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.SDue)
+        </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.UserTb.UName)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SNo)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.SDue)
+            </td>*@
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.UserTb.UName)
+                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "EditSupplier", new { id = item.SId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.SId }) |
+                @Html.ActionLink("Delete", "DeleteSupplier", new { id = item.SId })
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.ActionLink("Back to List", "Dashboard")
+</div>

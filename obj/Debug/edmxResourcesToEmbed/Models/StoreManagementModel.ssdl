@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StoreManagementDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdminTb">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="CustomerTb">
+    <Key>
+      <PropertyRef Name="CId" />
+    </Key>
+    <Property Name="CId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CName" Type="varchar" MaxLength="50" />
+    <Property Name="CPhoneNo" Type="varchar" MaxLength="11" />
+    <Property Name="CDue" Type="money" />
+    <Property Name="User" Type="int" />
+  </EntityType>
+  <EntityType Name="InventoryTb">
+    <Key>
+      <PropertyRef Name="PId" />
+    </Key>
+    <Property Name="PId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PName" Type="varchar" MaxLength="50" />
+    <Property Name="PQuantity" Type="int" />
+    <Property Name="PPrice" Type="money" />
+    <Property Name="User" Type="int" />
+  </EntityType>
+  <EntityType Name="InvoiceTb">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ListName" Type="varchar" MaxLength="50" />
+    <Property Name="LQuantity" Type="int" />
+    <Property Name="Bill" Type="money" />
+    <Property Name="CustName" Type="int" />
+  </EntityType>
+  <EntityType Name="SupInvoiceTb">
+    <Key>
+      <PropertyRef Name="SI" />
+    </Key>
+    <Property Name="SI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SProductName" Type="varchar" MaxLength="50" />
+    <Property Name="SQuantity" Type="int" />
+    <Property Name="Bill" Type="money" />
+    <Property Name="SName" Type="int" />
+  </EntityType>
+  <EntityType Name="SupplierTb">
+    <Key>
+      <PropertyRef Name="SId" />
+    </Key>
+    <Property Name="SId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SName" Type="varchar" MaxLength="50" />
+    <Property Name="SNo" Type="nchar" MaxLength="11" />
+    <Property Name="SDue" Type="money" />
+    <Property Name="User" Type="int" />
+  </EntityType>
+  <EntityType Name="UserTb">
+    <Key>
+      <PropertyRef Name="UId" />
+    </Key>
+    <Property Name="UId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UName" Type="varchar" MaxLength="50" />
+    <Property Name="UEmail" Type="varchar" MaxLength="50" />
+    <Property Name="UPassword" Type="varchar(max)" />
+    <Property Name="ConfirmPassword" Type="varchar(max)" />
+    <Property Name="UShopName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_CustomerTb_ToTable">
+    <End Role="UserTb" Type="Self.UserTb" Multiplicity="0..1" />
+    <End Role="CustomerTb" Type="Self.CustomerTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTb">
+        <PropertyRef Name="UId" />
+      </Principal>
+      <Dependent Role="CustomerTb">
+        <PropertyRef Name="User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryTb_ToTable">
+    <End Role="UserTb" Type="Self.UserTb" Multiplicity="0..1" />
+    <End Role="InventoryTb" Type="Self.InventoryTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTb">
+        <PropertyRef Name="UId" />
+      </Principal>
+      <Dependent Role="InventoryTb">
+        <PropertyRef Name="User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceTb_ToTable">
+    <End Role="CustomerTb" Type="Self.CustomerTb" Multiplicity="0..1" />
+    <End Role="InvoiceTb" Type="Self.InvoiceTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerTb">
+        <PropertyRef Name="CId" />
+      </Principal>
+      <Dependent Role="InvoiceTb">
+        <PropertyRef Name="CustName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupInvoiceTb_ToTable">
+    <End Role="SupplierTb" Type="Self.SupplierTb" Multiplicity="0..1" />
+    <End Role="SupInvoiceTb" Type="Self.SupInvoiceTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupplierTb">
+        <PropertyRef Name="SId" />
+      </Principal>
+      <Dependent Role="SupInvoiceTb">
+        <PropertyRef Name="SName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplierTb_ToTable">
+    <End Role="UserTb" Type="Self.UserTb" Multiplicity="0..1" />
+    <End Role="SupplierTb" Type="Self.SupplierTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTb">
+        <PropertyRef Name="UId" />
+      </Principal>
+      <Dependent Role="SupplierTb">
+        <PropertyRef Name="User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StoreManagementDbModelStoreContainer">
+    <EntitySet Name="AdminTb" EntityType="Self.AdminTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerTb" EntityType="Self.CustomerTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InventoryTb" EntityType="Self.InventoryTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceTb" EntityType="Self.InvoiceTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupInvoiceTb" EntityType="Self.SupInvoiceTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupplierTb" EntityType="Self.SupplierTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserTb" EntityType="Self.UserTb" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CustomerTb_ToTable" Association="Self.FK_CustomerTb_ToTable">
+      <End Role="UserTb" EntitySet="UserTb" />
+      <End Role="CustomerTb" EntitySet="CustomerTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryTb_ToTable" Association="Self.FK_InventoryTb_ToTable">
+      <End Role="UserTb" EntitySet="UserTb" />
+      <End Role="InventoryTb" EntitySet="InventoryTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceTb_ToTable" Association="Self.FK_InvoiceTb_ToTable">
+      <End Role="CustomerTb" EntitySet="CustomerTb" />
+      <End Role="InvoiceTb" EntitySet="InvoiceTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupInvoiceTb_ToTable" Association="Self.FK_SupInvoiceTb_ToTable">
+      <End Role="SupplierTb" EntitySet="SupplierTb" />
+      <End Role="SupInvoiceTb" EntitySet="SupInvoiceTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplierTb_ToTable" Association="Self.FK_SupplierTb_ToTable">
+      <End Role="UserTb" EntitySet="UserTb" />
+      <End Role="SupplierTb" EntitySet="SupplierTb" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

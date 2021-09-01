@@ -1,0 +1,51 @@
+﻿@model IEnumerable<TallyBook_Store_Management_System.Models.InventoryTb>
+
+@{
+    ViewBag.Title = "ViewInventory";
+    Layout = "~/Views/Shared/_InventoryLayout.cshtml";
+}
+
+<h2>View Inventory</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PPrice)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PPrice)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "EditInventory", new { id=item.PId }) |
+           @* @Html.ActionLink("Details", "Details", new { id=item.PId }) |*@
+            @Html.ActionLink("Delete", "DeleteInventory", new { id=item.PId })
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink("Return ", "Dashboard")
+</div>

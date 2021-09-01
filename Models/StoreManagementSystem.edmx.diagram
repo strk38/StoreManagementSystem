@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4210f35bb6eb4fe6ba2c2178fb8a240a" Name="Diagram1">
+        <EntityTypeShape EntityType="StoreManagementDbModel.AdminTb" Width="1.5" PointX="6.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreManagementDbModel.CustomerTb" Width="1.5" PointX="5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreManagementDbModel.InventoryTb" Width="1.5" PointX="2.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreManagementDbModel.InvoiceTb" Width="1.5" PointX="5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreManagementDbModel.SupInvoiceTb" Width="1.5" PointX="0.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreManagementDbModel.SupplierTb" Width="1.5" PointX="0.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreManagementDbModel.UserTb" Width="1.5" PointX="2.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="StoreManagementDbModel.FK_CustomerTb_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreManagementDbModel.FK_InvoiceTb_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreManagementDbModel.FK_InventoryTb_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreManagementDbModel.FK_SupInvoiceTb_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreManagementDbModel.FK_SupplierTb_ToTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StoreManagementDbModelStoreContainer" CdmEntityContainer="StoreManagementDbEntities">
+    <EntitySetMapping Name="AdminTb1">
+      <EntityTypeMapping TypeName="StoreManagementDbModel.AdminTb1">
+        <MappingFragment StoreEntitySet="AdminTb">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerTb1">
+      <EntityTypeMapping TypeName="StoreManagementDbModel.CustomerTb1">
+        <MappingFragment StoreEntitySet="CustomerTb">
+          <ScalarProperty Name="User" ColumnName="User" />
+          <ScalarProperty Name="CDue" ColumnName="CDue" />
+          <ScalarProperty Name="CPhoneNo" ColumnName="CPhoneNo" />
+          <ScalarProperty Name="CName" ColumnName="CName" />
+          <ScalarProperty Name="CId" ColumnName="CId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventoryTb1">
+      <EntityTypeMapping TypeName="StoreManagementDbModel.InventoryTb1">
+        <MappingFragment StoreEntitySet="InventoryTb">
+          <ScalarProperty Name="User" ColumnName="User" />
+          <ScalarProperty Name="PPrice" ColumnName="PPrice" />
+          <ScalarProperty Name="PQuantity" ColumnName="PQuantity" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="PId" ColumnName="PId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceTb1">
+      <EntityTypeMapping TypeName="StoreManagementDbModel.InvoiceTb1">
+        <MappingFragment StoreEntitySet="InvoiceTb">
+          <ScalarProperty Name="CustName" ColumnName="CustName" />
+          <ScalarProperty Name="Bill" ColumnName="Bill" />
+          <ScalarProperty Name="LQuantity" ColumnName="LQuantity" />
+          <ScalarProperty Name="ListName" ColumnName="ListName" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupInvoiceTb1">
+      <EntityTypeMapping TypeName="StoreManagementDbModel.SupInvoiceTb1">
+        <MappingFragment StoreEntitySet="SupInvoiceTb">
+          <ScalarProperty Name="SName" ColumnName="SName" />
+          <ScalarProperty Name="Bill" ColumnName="Bill" />
+          <ScalarProperty Name="SQuantity" ColumnName="SQuantity" />
+          <ScalarProperty Name="SProductName" ColumnName="SProductName" />
+          <ScalarProperty Name="SI" ColumnName="SI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierTb1">
+      <EntityTypeMapping TypeName="StoreManagementDbModel.SupplierTb1">
+        <MappingFragment StoreEntitySet="SupplierTb">
+          <ScalarProperty Name="User" ColumnName="User" />
+          <ScalarProperty Name="SDue" ColumnName="SDue" />
+          <ScalarProperty Name="SNo" ColumnName="SNo" />
+          <ScalarProperty Name="SName" ColumnName="SName" />
+          <ScalarProperty Name="SId" ColumnName="SId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTb1">
+      <EntityTypeMapping TypeName="StoreManagementDbModel.UserTb1">
+        <MappingFragment StoreEntitySet="UserTb">
+          <ScalarProperty Name="UShopName" ColumnName="UShopName" />
+          <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+          <ScalarProperty Name="UPassword" ColumnName="UPassword" />
+          <ScalarProperty Name="UEmail" ColumnName="UEmail" />
+          <ScalarProperty Name="UName" ColumnName="UName" />
+          <ScalarProperty Name="UId" ColumnName="UId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
