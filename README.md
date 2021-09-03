@@ -10,3 +10,5 @@ This also helps them to track of those who have dues.
 
 The Supplier list works the same as Customer list. But this list is to keep track, to those the shop owner owes money.
 
+The product quantity in inventory updates automatically based on the order of customer and products supplied by supplier. 
+
