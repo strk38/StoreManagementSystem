@@ -41,6 +41,7 @@ namespace TallyBook_Store_Management_System.Controllers
             }
             else
             {
+                ViewBag.Msg = "Welcome to Admin Dashboard";
                 return View();
             }
 
@@ -53,6 +54,7 @@ namespace TallyBook_Store_Management_System.Controllers
             }
             else
             {
+                ViewBag.data = db.AdminTbs.ToList();
                 return View(db.AdminTbs.ToList());
             }
         }
@@ -75,6 +77,7 @@ namespace TallyBook_Store_Management_System.Controllers
                 {
                     db.AdminTbs.Add(aDetail);
                     db.SaveChanges();
+                    ViewBag.data = db.AdminTbs.ToList();
                     return RedirectToAction("ViewAdmin");
                 }
                 catch
@@ -101,6 +104,7 @@ namespace TallyBook_Store_Management_System.Controllers
                 {
                     db.Entry(adEdit).State = EntityState.Modified;
                     db.SaveChanges();
+                    ViewBag.data = db.AdminTbs.ToList();
                     return RedirectToAction("ViewAdmin");
                 }
                 catch
@@ -128,6 +132,7 @@ namespace TallyBook_Store_Management_System.Controllers
 
                     db.AdminTbs.Remove(db.AdminTbs.Where(a => a.Id == id).FirstOrDefault());
                     db.SaveChanges();
+                    ViewBag.data = db.AdminTbs.ToList();
                     return RedirectToAction("ViewAdmin");
                 }
                 catch
@@ -151,6 +156,7 @@ namespace TallyBook_Store_Management_System.Controllers
             }
             else
             {
+                ViewBag.data = db.UserTbs.ToList();
                 return View(db.UserTbs.ToList());
             }
         }

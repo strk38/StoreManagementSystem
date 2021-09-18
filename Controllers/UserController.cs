@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TallyBook_Store_Management_System.Models;
 
@@ -46,8 +45,9 @@ namespace TallyBook_Store_Management_System.Controllers
 
             if (verify != null)
             {
-                Session["User"] = verify.UId;
+                Session["User"] = verify.UName;
                 i = verify.UId;
+                //Console.WriteLine(Session["User"]);
                 return RedirectToAction("Dashboard");
             }
             else
@@ -60,15 +60,15 @@ namespace TallyBook_Store_Management_System.Controllers
 
         public ActionResult Dashboard()
         {
-            if (Session["User"] == null)
-            {
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                return View();
-            }
+            
+            
+            if (Session["User"] == null) return RedirectToAction("Login");
 
+            ViewBag.Title = "Dashboard";
+            ViewBag.Msg = "Welcome to Dashboard";
+            return View();
+            
+           
         }
 
         public ActionResult Logout()
@@ -78,15 +78,17 @@ namespace TallyBook_Store_Management_System.Controllers
         }
 
         public ActionResult ViewInventory()
-        {
+        {//changed
             if (Session["User"] == null)
             {
                 return RedirectToAction("Login");
             }
             else
             {    //need uid query
-                /*var inv= (from str in db.InventoryTbs where str.User==i select str).ToList() ;
-                ViewBag.data = inv;*/
+                var inv = (from str in db.InventoryTbs where str.User == i select str).ToList();
+                //Debug.WriteLine(inv);
+                ViewBag.data = db.InventoryTbs.ToList();
+                
                 return View(db.InventoryTbs.ToList());
             }
         }
@@ -109,6 +111,7 @@ namespace TallyBook_Store_Management_System.Controllers
                 {
                     db.InventoryTbs.Add(idetail);
                     db.SaveChanges();
+                    ViewBag.data = db.InventoryTbs.ToList();
                     return RedirectToAction("ViewInventory");
                 }
                 catch
@@ -118,29 +121,35 @@ namespace TallyBook_Store_Management_System.Controllers
             }
         }
         public ActionResult EditInventory(int id)
-        {
+        {   
             return View(db.InventoryTbs.Where(a => a.PId == id).FirstOrDefault());
         }
         [HttpPost]
         public ActionResult EditInventory(int id, InventoryTb inventory)
         {
-            if (Session["User"] == null) //doesnt work
+            if (Session["User"] == null) 
             {
                 return RedirectToAction("Login");
             }
-            else
+            /*try
             {
-                try
-                {
-                    db.Entry(inventory).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("ViewInventory");
-                }
-                catch
-                {
-                    return View();
-                }
+                db.Entry(inventory).State = EntityState.Modified;
+                db.SaveChanges();
+                ViewBag.msg = "Successfully updated";
+                return RedirectToAction("ViewInventory");
             }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+                return View();
+            }*/
+
+            db.Entry(inventory).State = EntityState.Modified;
+            db.SaveChanges();
+            ViewBag.data = db.InventoryTbs.ToList();
+            //ViewBag.msg = "Successfully updated";
+            return RedirectToAction("ViewInventory");
+
         }
 
         public ActionResult DeleteInventory(int id)
@@ -161,6 +170,7 @@ namespace TallyBook_Store_Management_System.Controllers
 
                     db.InventoryTbs.Remove(db.InventoryTbs.Where(a => a.PId == id).FirstOrDefault());
                     db.SaveChanges();
+                    ViewBag.data = db.InventoryTbs.ToList();
                     return RedirectToAction("ViewInventory");
                 }
                 catch
@@ -178,6 +188,7 @@ namespace TallyBook_Store_Management_System.Controllers
             }
             else
             {
+                ViewBag.data = db.SupplierTbs.ToList();
                 return View(db.SupplierTbs.ToList());
             }
         }
@@ -199,6 +210,7 @@ namespace TallyBook_Store_Management_System.Controllers
                 {
                     db.SupplierTbs.Add(sdetail);
                     db.SaveChanges();
+                    ViewBag.data = db.SupplierTbs.ToList();
                     return RedirectToAction("ViewSupplier");
                 }
                 catch
@@ -225,6 +237,7 @@ namespace TallyBook_Store_Management_System.Controllers
                 {
                     db.Entry(sList).State = EntityState.Modified;
                     db.SaveChanges();
+                    ViewBag.data = db.SupplierTbs.ToList();
                     return RedirectToAction("ViewSupplier");
                 }
                 catch
@@ -253,6 +266,7 @@ namespace TallyBook_Store_Management_System.Controllers
 
                     db.SupplierTbs.Remove(db.SupplierTbs.Where(a => a.SId == id).FirstOrDefault());
                     db.SaveChanges();
+                    ViewBag.data = db.SupplierTbs.ToList();
                     return RedirectToAction("ViewSupplier");
                 }
                 catch
@@ -270,6 +284,7 @@ namespace TallyBook_Store_Management_System.Controllers
             }
             else
             {
+                ViewBag.data = db.CustomerTbs.ToList();
                 return View(db.CustomerTbs.ToList());
             }
         }
@@ -296,6 +311,7 @@ namespace TallyBook_Store_Management_System.Controllers
                     //cdetail.User = i;
                     db.CustomerTbs.Add(cdetail);
                     db.SaveChanges();
+                    ViewBag.data = db.CustomerTbs.ToList();
                     return RedirectToAction("ViewCustomer");
                 }
                 catch
@@ -322,6 +338,7 @@ namespace TallyBook_Store_Management_System.Controllers
                 {
                     db.Entry(cList).State = EntityState.Modified;
                     db.SaveChanges();
+                    ViewBag.data = db.CustomerTbs.ToList();
                     return RedirectToAction("ViewCustomer");
                 }
                 catch
@@ -350,6 +367,7 @@ namespace TallyBook_Store_Management_System.Controllers
 
                     db.CustomerTbs.Remove(db.CustomerTbs.Where(a => a.CId == id).FirstOrDefault());
                     db.SaveChanges();
+                    ViewBag.data = db.CustomerTbs.ToList();
                     return RedirectToAction("ViewCustomer");
                 }
                 catch
@@ -417,6 +435,7 @@ namespace TallyBook_Store_Management_System.Controllers
                     idetail.Bill =idetail.LQuantity*price;
                     db.InvoiceTbs.Add(idetail);
                     db.SaveChanges();
+                    ViewBag.data = db.InvoiceTbs.ToList();
                     return RedirectToAction("ShowInvoice");
                 }
                 catch
@@ -445,6 +464,7 @@ namespace TallyBook_Store_Management_System.Controllers
 
                     db.InvoiceTbs.Remove(db.InvoiceTbs.Where(a => a.InvoiceId == id).FirstOrDefault());
                     db.SaveChanges();
+                    ViewBag.data= db.InvoiceTbs.ToList();
                     return RedirectToAction("ShowInvoice");
                 }
                 catch
@@ -469,14 +489,13 @@ namespace TallyBook_Store_Management_System.Controllers
             {
                 try
                 {
-                    var cost = (from Invent in db.InventoryTbs where Invent.PId == id select Invent.PPrice).FirstOrDefault();
+                    var cost = (from vent in db.InventoryTbs where vent.PId == id select vent.PPrice).FirstOrDefault();
                     decimal price = Convert.ToDecimal(cost);
-
-                    
                     invoice.Bill = invoice.LQuantity * price;
 
                     db.Entry(invoice).State = EntityState.Modified;
                     db.SaveChanges();
+                    ViewBag.data = db.InvoiceTbs.ToList();
                     return RedirectToAction("ShowInvoice");
                 }
                 catch
